@@ -69,3 +69,6 @@ npx playwright show-report
 - Generate automated test reports
 ## Project Status
 Completed as a hands-on learning project.
+
+## Test Execution Report
+![Playwright Test Report](playwright-report.png)
