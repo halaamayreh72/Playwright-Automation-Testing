@@ -1,74 +1,60 @@
-# Playwright Automation Testing Project
-## About the Project
-This project is a practical UI Automation Testing project using Playwright with TypeScript.
-The project tests the main functionalities of the SauceDemo website.
-Website: https://www.saucedemo.com/
-## Tools & Technologies
-- Playwright
-- TypeScript
-- Node.js
-- Visual Studio Code
-- Git & GitHub
-## Test Scenarios
-### 1. Login Testing
-- Login with valid credentials
-- Login with invalid password
-- Login with empty username
-- Login with empty password
-- Locked out user login
-### 2. Products Testing
-- Verify products page title
-- Verify products count
-- Verify product names
-- Open product details
-- Verify product price
-### 3. Sorting Testing
-- Sort products by price (Low to High)
-- Sort products by price (High to Low)
-- Sort products by name (A to Z)
-### 4. Cart Testing
-- Add product to cart
-- Verify product in cart
-- Remove product from cart
-- Remove all products from cart
-- Continue shopping
-### 5. Checkout Testing
-- Complete checkout successfully
-- Checkout with empty first name
-- Checkout with empty last name
-- Checkout with empty postal code
-- Cancel checkout
-### 6. Logout Testing
-- Logout successfully
-## How to Run the Tests
+# Playwright UI Automation
+
+Playwright end-to-end tests for the publicly hosted [SauceDemo](https://www.saucedemo.com/) shopping application. The suite uses TypeScript and `@playwright/test`.
+
+## Project structure
+
+```text
+tests/
+  authentication/  Login and session scenarios
+  cart/            Cart contents, navigation, and quantity behavior
+  checkout/        Validation, order totals, cancellation, and completion
+  inventory/       Product details, inventory content, and sorting
+specs/
+  test.plan.md      Regression test plan
+```
+
+The tests use SauceDemo's public demo accounts and create their own state for each scenario. Cart quantities are displayed as one per item; the application does not provide an edit control.
+
+## Run tests
+
 Install dependencies:
+
 ```bash
 npm install
 ```
-Run all tests:
+
+Run the full suite in all configured browser projects (Chromium, Firefox, and WebKit):
+
 ```bash
 npx playwright test
 ```
-Run a specific test file:
+
+Run a feature folder in Chromium:
+
 ```bash
-npx playwright test tests/sorting.spec.ts
+npx playwright test tests/cart --project=chromium
 ```
-Run tests with browser visible:
+
+Run a single spec:
+
 ```bash
-npx playwright test --headed
+npx playwright test tests/inventory/sorting.spec.ts --project=chromium
 ```
-Open HTML report:
+
+Open the latest HTML report:
+
 ```bash
 npx playwright show-report
 ```
-## Learning Goals
-- Practice UI Automation Testing
-- Write positive and negative test cases
-- Use Playwright locators and assertions
-- Validate application behavior
-- Generate automated test reports
-## Project Status
-Completed as a hands-on learning project.
 
-## Test Execution Report
+Tests access the live SauceDemo site, so they require network access and may be affected by changes or outages of that external service.
+
+## Coverage
+
+- Authentication: valid and invalid credentials, locked accounts, logout, and browser history.
+- Inventory: product details and inventory sorting in both directions by name and price.
+- Cart: adding/removing items, retained contents, empty-cart behavior, and the lack of quantity editing.
+- Checkout: required customer fields, order totals, cancellation, and order completion.
+
 ![Playwright Test Report](playwright-report.png)
